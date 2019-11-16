@@ -147,6 +147,8 @@ class PartyActivity : AppCompatActivity() {
     }
 
     fun startRealTime() {
+        db.collection(PARTIES).document(partyId)
+
         currListener = db.collection(PARTIES).document(partyId)
             .addSnapshotListener { snapshot, _ ->
                 if (snapshot?.data != null) {
