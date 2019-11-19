@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.spotify.sdk.android.authentication.AuthenticationClient
@@ -60,8 +62,7 @@ class PartyActivity : AppCompatActivity() {
 //            }
 //        }
 
-        //startRealTime()
-        fillAdapter()
+        startRealTime()
 
         findViewById<Button>(R.id.addPlaylist).setOnClickListener {
             getSpotifyToken(REQUEST_CODE)
@@ -133,7 +134,7 @@ class PartyActivity : AppCompatActivity() {
     }
 
     fun fillAdapter() {
-        class FillTask() : AsyncTask<Void, Void, List<Map<String, String>>>() {
+        class FillTask: AsyncTask<Void, Void, List<Map<String, String>>>() {
             override fun doInBackground(vararg params: Void?): List<Map<String, String>> {
                 return AsyncUtils.getPartySongs(partyId)
             }
@@ -151,9 +152,7 @@ class PartyActivity : AppCompatActivity() {
         currListener = db.collection(PARTIES).document(partyId)
             .addSnapshotListener { snapshot, _ ->
                 if (snapshot?.data != null) {
-                    var data = snapshot.data as Map<String, List<String>>
-                    Log.d("BBBB", data.toString())
-                    adapter.updateData(AsyncUtils.getSongs(data[FILTERED_TRACKS]))
+                    fillAdapter()
                 }
             }
     }
