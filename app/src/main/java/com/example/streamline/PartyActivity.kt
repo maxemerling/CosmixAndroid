@@ -62,6 +62,7 @@ class PartyActivity : AppCompatActivity() {
 //            }
 //        }
 
+        fillAdapter()
         startRealTime()
 
         findViewById<Button>(R.id.addPlaylist).setOnClickListener {
@@ -134,16 +135,16 @@ class PartyActivity : AppCompatActivity() {
     }
 
     fun fillAdapter() {
-        class FillTask: AsyncTask<Void, Void, List<Map<String, String>>>() {
+        class FillTask : AsyncTask<Void, Void, List<Map<String, String>>>() {
             override fun doInBackground(vararg params: Void?): List<Map<String, String>> {
                 return AsyncUtils.getPartySongs(partyId)
             }
 
             override fun onPostExecute(result: List<Map<String, String>>?) {
+                adapter.clear()
                 result?.forEach { adapter.addSong(Song(it.getValue("name"), it.getValue("artist"))) }
             }
         }
-
         FillTask().execute()
     }
 
@@ -151,9 +152,7 @@ class PartyActivity : AppCompatActivity() {
         db.collection(PARTIES).document(partyId)
         currListener = db.collection(PARTIES).document(partyId)
             .addSnapshotListener { snapshot, _ ->
-                if (snapshot?.data != null) {
-                    fillAdapter()
-                }
+                fillAdapter()
             }
     }
 

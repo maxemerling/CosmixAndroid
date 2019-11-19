@@ -30,6 +30,10 @@ class Adapter(var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHold
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        updateData(mutableListOf())
+    }
+
     fun addSong(song: Song) {
         songs.add(song)
         notifyDataSetChanged()
