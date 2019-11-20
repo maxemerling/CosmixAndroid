@@ -14,13 +14,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="121dp"
+                android:layout_height="124dp"
+                android:layout_weight=".30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.983"
+                app:layout_constraintStart_toEndOf="@+id/songName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/common_google_signin_btn_icon_light_focused" />
+
             <TextView
                 android:id="@+id/songName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="183dp"
+                android:layout_height="39dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="4dp"
+                android:layout_weight=".60"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="#000000"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -31,11 +46,14 @@
 
             <TextView
                 android:id="@+id/songArtist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="177dp"
+                android:layout_height="19dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="24dp"
+                android:layout_weight=".60"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

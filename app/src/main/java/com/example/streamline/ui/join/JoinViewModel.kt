@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class JoinViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "Cosmix"
+        value = ""
     }
     val text: LiveData<String> = _text
 }
