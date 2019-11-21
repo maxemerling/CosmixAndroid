@@ -16,6 +16,7 @@ import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
 public class AsyncUtils {
+
     public static List<Song> getSongs(List<String> ids) {
         ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -29,7 +30,7 @@ public class AsyncUtils {
             }));
         }
 
-        Set<Song> songs = new HashSet<>();
+        List<Song> songs = new ArrayList<>();
 
         for (Future<Song> future : futures) {
             try {
@@ -39,12 +40,32 @@ public class AsyncUtils {
             }
         }
 
-        //return songs
-
+        return songs;
+        /*
         List<Song> deprecatedSet = new ArrayList<Song>();
         deprecatedSet.add(new Song("DEPRECATED", "SHOULND'T BE USING GETSONGS METHOD"));
         return deprecatedSet;
+         */
     }
+
+    /*
+    public static List<Song> getSongs(List<String> isrcs) {
+        try {
+            List<Map<String, String>> map = Executors.newSingleThreadExecutor().submit(() -> CloudUtilsKt.getSongFacts(isrcs)).get();
+            List<Song> songs = new ArrayList<>();
+            for (Map<String, String> element : map) {
+                songs.add(new Song(element.get("name"), element.get("artist")));
+            }
+
+            return songs;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }*/
 
     public static boolean checkParty(String partyID) {
         ExecutorService executor = Executors.newSingleThreadExecutor();

@@ -43,6 +43,7 @@ private fun callFunction(name: String, params: Map<String, Any>) : String {
 }
 
 fun getSongFacts(isrc: String) : Map<String, String> = getDict(callFunction(GET_FACTS, mapOf(Pair("isrc", isrc))))
+//fun getSongFacts(isrcs: List<String>) : List<Map<String, String>> = getMapList(callFunction(GET_FACTS, mapOf(Pair("isrc", isrcs))))
 
 fun checkParty(partyId: String) : Boolean =
     getDict(callFunction(CHECK_PARTY, mapOf(Pair("id", partyId))))["result"] as Boolean
